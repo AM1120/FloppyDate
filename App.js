@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './src/navigation/AppNavigator'; // Tu navegador
+import { EventsProvider } from './src/context/EventsContext';
+import { RewardsProvider } from './src/context/RewardsContext';
+//import firebaseapp from './src/services/firebase';
+import SplashScreen from './src/screens/SplashScreen'; 
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './src/screens/HomeScreen';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Floppy Date</Text>
-      <StatusBar style="auto" />
-    </View>
+  const Stack = createStackNavigator ();
+  function MyStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Splash" component={SplashScreen}/>
+      </Stack.Navigator>
+    
   );
-}
+ } 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return(
+    <NavigationContainer>
+      <MyStack/>
+    </NavigationContainer>
+  )
+
+}
