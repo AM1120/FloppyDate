@@ -1,11 +1,11 @@
 import { Text, View } from "react-native";
 
-export function StatsScreen () {
+export function AgendaScreen () {
     return(
         <view>
-            <text>DEtalles</text>
+            <text>Detalles</text>
         </view>
     )
 }
 
-export default StatsScreen
+export default AgendaScreen
