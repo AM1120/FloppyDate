@@ -1,54 +1,56 @@
+// src/screens/SplashScreen.js
 import React, { useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Necesitas useNavigation para acceder al objeto de navegación
 
-export default function SplashScreen({ navigation }) {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.replace('Home'); 
-    }, 5000); 
-
-    return () => clearTimeout(timer);
-  }, []);
-
+export default function SplashScreen() {
   return (
     <ImageBackground
       source={require('../../assets/fondo.png')}
       style={styles.fondo}
     >
-
-    <View style={styles.container}>
-      <Text style={styles.title}>FLOPPY DATE</Text>
-      <Image source={require('../../assets/Logo-Circular.png')} style={styles.image} />
-    </View>
+      <View style={styles.contentContainer}>
+        <Image
+          source={require('../../assets/titlefloppy.png')}
+          style={styles.titleImage}
+          resizeMode="contain"
+        />
+        <View style={styles.spacer} />
+        <Image
+          source={require('../../assets/Logo-Circular.png')}
+          style={styles.mainLogo}
+          resizeMode="contain"
+        />
+      </View>
     </ImageBackground>
   );
 }
 
-
-
-//Tipos de styles dentro de esta página
+// Tus estilos del splash (como los definimos anteriormente)
 const styles = StyleSheet.create({
-  container: {
+  fondo: {
     flex: 1,
-    backgroundColor: '#6A4CA4',
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    fontSize: 36,
-    color: '#EFF2D8',
-    fontWeight: 'bold',
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 50,
+  },
+  titleImage: {
+    width: 200,
+    height: 100,
     marginBottom: 20,
   },
-  image: {
-    width: 150,
-    height: 150,
-    resizeMode: 'contain',
+  spacer: {
+    height: 50,
   },
-  fondo:{
-    flex: 1,
-    width:'100%',
-    height: '100%',
-
+  mainLogo: {
+    width: 200,
+    height: 200,
   },
 });

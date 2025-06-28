@@ -1,36 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-//import firebaseapp from './src/services/firebase';
-import SplashScreen from './src/screens/SplashScreen'; 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/screens/HomeScreen';
-import AgendaScreen from './src/screens/AgendaScreen';
+import SplashScreen from './src/screens/SplashScreen';
+import AppDrawerNavigator from './src/navigation/DrawerNavigator'; 
 import CalendarScreen from './src/screens/CalendarScreen';
 
-
-//el orden con el cual se estará haciendo el llamado a los diferentes screen
-  //Splah (el inicio)
-  //Home (Donde el usuario navegará)
-  //
+const RootStack = createNativeStackNavigator();
 
 export default function App() {
-  const Stack = createNativeStackNavigator ();
-  function MyStack() {
-    return (
-      <Stack.Navigator> 
-        <Stack.Screen name="Splash" component={SplashScreen}/> 
-        <Stack.Screen name="Home" component={HomeScreen}/>
-        <Stack.Screen name="Calendar" component={CalendarScreen}/>           
-        <Stack.Screen name="Agenda" component={AgendaScreen}/>        
-      </Stack.Navigator>
-    
-  );
- } 
+  const [isLoading, setIsLoading] = useState(true);
 
-  return(
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
+  return (
     <NavigationContainer>
-      <MyStack/>
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+        {isLoading ? (
+          <RootStack.Screen name="Splash" component={SplashScreen} />
+        ) : (
+          <RootStack.Screen name="MainApp" component={AppDrawerNavigator} />
+        )}
+      </RootStack.Navigator>
     </NavigationContainer>
-  )
-
+  );
 }
